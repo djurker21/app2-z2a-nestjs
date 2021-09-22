@@ -10,4 +10,7 @@ export class Country extends Model {
 
   @Column
   flag: string;
+
+  @Column
+  lat_long: string;
 }
