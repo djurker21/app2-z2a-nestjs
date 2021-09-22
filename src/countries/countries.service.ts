@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
 import { Country } from './entities/country.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class CountriesService {
@@ -39,5 +40,15 @@ export class CountriesService {
 
   async remove(id: number) {
     return await this.countriesRepository.destroy({ where: { id: id } });
+  }
+
+  async search(name: string) {
+    return await this.countriesRepository.findAll({
+      where: {
+        name: {
+          [Op.substring]: name,
+        },
+      },
+    });
   }
 }

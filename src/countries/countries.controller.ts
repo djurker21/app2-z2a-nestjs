@@ -31,6 +31,11 @@ export class CountriesController {
     return this.countriesService.findAllPaginate(page, limit);
   }
 
+  @Get('search?')
+  findAllSearch(@Query('name') name: string) {
+    return this.countriesService.search(name);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.countriesService.findOne(+id);
