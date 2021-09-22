@@ -18,6 +18,15 @@ export class CountriesService {
     return await this.countriesRepository.findAll();
   }
 
+  async findAllPaginate(page: number, pageSize: number) {
+    const offset = page * pageSize;
+    const limit = pageSize;
+    return await this.countriesRepository.findAll({
+      limit: limit,
+      offset: offset,
+    });
+  }
+
   async findOne(id: number) {
     return await this.countriesRepository.findOne({ where: { id } });
   }

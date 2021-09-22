@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CountriesService } from './countries.service';
 import { CreateCountryDto } from './dto/create-country.dto';
@@ -23,6 +24,11 @@ export class CountriesController {
   @Get()
   findAll() {
     return this.countriesService.findAll();
+  }
+
+  @Get('paginate?')
+  findAllPaginate(@Query('page') page: number, @Query('limit') limit: number) {
+    return this.countriesService.findAllPaginate(page, limit);
   }
 
   @Get(':id')
